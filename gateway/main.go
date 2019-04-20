@@ -6,8 +6,8 @@ import (
 	"net"
 	"os"
 
-	pb "github.com/tommy-sho/grpc-loadbalncing/app/gateway/genproto"
-	"github.com/tommy-sho/grpc-loadbalncing/app/gateway/server"
+	pb "github.com/tommy-sho/grpc-loadbalncing/gateway/genproto"
+	"github.com/tommy-sho/grpc-loadbalncing/gateway/server"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -26,8 +26,7 @@ func main() {
 	pb.RegisterGreetingServerServer(s, g)
 	reflection.Register(s)
 
-	//lis, err := net.Listen("tcp", fmt.Sprintf(":%v", os.Getenv("PORT_NUMBER")))
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", "50000"))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", os.Getenv("PORT_NUMBER")))
 	if err != nil {
 		panic(err)
 	}

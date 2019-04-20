@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	proto "github.com/tommy-sho/grpc-loadbalncing/app/gateway/genproto"
+	proto "github.com/tommy-sho/grpc-loadbalncing/gateway/genproto"
 )
 
 type GatewayService struct {
