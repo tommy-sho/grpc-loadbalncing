@@ -17,13 +17,12 @@ func NewBackendServer(userRepo BackendRepository) *BackendServer {
 	}
 }
 
-func (b *BackendServer) Greeting(ctx context.Context, req *proto.GreetingRequest) (*proto.GreetingResponse, error) {
+func (b *BackendServer) Message(ctx context.Context, req *proto.MessageRequest) (*proto.MessageResponse, error) {
 	m, err := b.userRepo.GetMessageByName(req.Name)
 	if err != nil {
-		return &proto.GreetingResponse{}, fmt.Errorf("Greeting error : %v ", err)
+		return &proto.MessageResponse{}, fmt.Errorf("Greeting error : %v ", err)
 	}
-
-	res := &proto.GreetingResponse{
+	res := &proto.MessageResponse{
 		Message: m,
 	}
 	return res, nil

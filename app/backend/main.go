@@ -18,7 +18,7 @@ func main() {
 	g := server.NewBackendServer(r)
 
 	s := grpc.NewServer()
-	pb.RegisterGreetingServerServer(s, g)
+	pb.RegisterBackendServerServer(s, g)
 	if err != nil {
 		panic(fmt.Errorf("new grpc server err: %v", err))
 	}
