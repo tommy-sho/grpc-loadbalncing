@@ -40,7 +40,6 @@ func main() {
 L:
 	for s.Scan() {
 		n := s.Text()
-		fmt.Print("> ")
 		switch n {
 		case "exit":
 			break L
@@ -52,5 +51,6 @@ L:
 			}
 			fmt.Println(r.Message)
 		}
+		fmt.Print("> ")
 	}
 }
