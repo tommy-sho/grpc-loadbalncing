@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	proto "github.com/tommy-sho/grpc-loadbalncing/app/backend/genproto"
+	proto "github.com/tommy-sho/grpc-loadbalncing/backend/genproto"
 )
 
 type BackendServer struct {

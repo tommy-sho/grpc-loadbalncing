@@ -10,7 +10,6 @@ RUN go install .
 
 FROM alpine as release
 RUN apk add --no-cache ca-certificates
-
 COPY --from=builder /go/bin/gateway /gateway
 ENV PORT_NUMBER=50000
 ENTRYPOINT ["/gateway"]

@@ -3,17 +3,19 @@ package main
 import (
 	"fmt"
 	"net"
-	"os"
 
-	pb "github.com/tommy-sho/grpc-loadbalncing/app/backend/genproto"
-	"github.com/tommy-sho/grpc-loadbalncing/app/backend/server"
+	pb "github.com/tommy-sho/grpc-loadbalncing/backend/genproto"
+	"github.com/tommy-sho/grpc-loadbalncing/backend/server"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
+const (
+	port = "50001"
+)
+
 func main() {
-	//ctx := context.Background()
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", os.Getenv("PORT_NUMBER")))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", port))
 	r := server.NewUserRepository()
 	g := server.NewBackendServer(r)
 

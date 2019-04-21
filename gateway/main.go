@@ -12,6 +12,10 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
+const (
+	port = "50000"
+)
+
 func main() {
 	ctx := context.Background()
 
@@ -26,7 +30,7 @@ func main() {
 	pb.RegisterGreetingServerServer(s, g)
 	reflection.Register(s)
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", os.Getenv("PORT_NUMBER")))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", port))
 	if err != nil {
 		panic(err)
 	}
