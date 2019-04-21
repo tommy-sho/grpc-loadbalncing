@@ -7,19 +7,18 @@ import (
 	"fmt"
 	"os"
 
-	proto "github.com/tommy-sho/grpc-loadbalncing/app/client/genproto"
+	proto "github.com/tommy-sho/grpc-loadbalncing/client/genproto"
 	"google.golang.org/grpc"
 )
 
 var (
-	gatewayPort string
-	port        string
-	method      string
+	gateway string
+	port    string
+	method  string
 )
 
 func init() {
-	flag.StringVar(&gatewayPort, "g-host", "gateway:50000", "gateway port")
-	flag.StringVar(&port, "port", "55555", "gateway port")
+	flag.StringVar(&gateway, "gateway", "gateway:50000", "gateway port")
 	flag.StringVar(&method, "method", "Greeting", "method name")
 }
 
@@ -29,7 +28,7 @@ func main() {
 
 	ctx := context.Background()
 
-	gConn, err := grpc.DialContext(ctx, os.Getenv(gatewayPort), grpc.WithInsecure())
+	gConn, err := grpc.DialContext(ctx, gateway, grpc.WithInsecure())
 	if err != nil {
 		panic(fmt.Errorf("failed to connect with backend server error : %v ", err))
 	}
@@ -37,13 +36,14 @@ func main() {
 	s := bufio.NewScanner(os.Stdin)
 
 	fmt.Print("> ")
+
 L:
 	for s.Scan() {
 		n := s.Text()
 		fmt.Print("> ")
 		switch n {
 		case "exit":
-			break Ler
+			break L
 		default:
 			r, err := c.Greeting(ctx, &proto.GreetingRequest{Name: n})
 			if err != nil {

@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1beta8
+kind: Config
+build:
+  artifacts:
+    - image: grcp/gateway
+      context: ./gateway/
+    - image: grpc/backend
+      context: ./backend/
+  local:
+    useBuildkit: true
+deploy:
+  kubectl:
+    manifests:
+      - ./kubernetes/*
