@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
+	"os"
 
 	proto "github.com/tommy-sho/grpc-loadbalncing/gateway/genproto"
 )
@@ -25,7 +26,7 @@ func (g *GatewayService) Greeting(ctx context.Context, req *proto.GreetingReques
 	}
 
 	res := &proto.GreetingResponse{
-		Message: r.Message,
+		Message: fmt.Sprintf("%v, gateway IP: %v ", r.Message, os.Getenv("MY_POD_IP")),
 	}
 	return res, nil
 }
