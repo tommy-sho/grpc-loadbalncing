@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: backend
 spec:
+  replicas: 5
   selector:
     matchLabels:
       app: backend
@@ -13,10 +14,14 @@ spec:
     spec:
       containers:
         - name: server
-          image: grpc/backend
-          imagePullPolicy: Never
+          image: ${BACKEND_IMAGE}
           ports:
-            - containerPort: 50000
+            - containerPort: 50001
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           resources:
             requests:
               cpu: 100m
